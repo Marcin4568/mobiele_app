@@ -1,2 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workouts - Mijn Gezondheid</title>
 
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="card">
+  <h2>Deze week</h2>
+
+  <ul>
+    <li>Maandag - Push ✔</li>
+    <li>Dinsdag - Rust</li>
+    <li>Woensdag - Cardio ✔</li>
+    <li>Donderdag - Rust</li>
+    <li>Vrijdag - Full body ✔</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Progressie</h2>
+  <p>Je zit op 60% van je weekdoel</p>
+
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+</section>
+
+    <!-- PROGRESS OVERVIEW -->
+    <section class="card">
+      <h2>Progressie overzicht</h2>
+      <p>Totale workouts deze week: <strong>3</strong></p>
+      <p>Rustdagen: <strong>2</strong></p>
+    </section>
+
+    <!-- NAAR TRAINING -->
+    <section class="card">
+      <h2>Training starten</h2>
+      <button class="primary-btn" onclick="goToTraining()">
+        Ga naar training
+      </button>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="index.html"><button>Home</button></a>
+    <a href="workouts.html"><button>Workouts</button></a>
+    <button>Voeding</button>
+    <button>Progressie</button>
+    <button>Instellingen</button>
+  </footer>
+
+  <script>
+    function goToTraining() {
+      alert("Training pagina komt later 👍");
+      // later: window.location.href = "training.html";
+    }
+  </script>
+
+</body>
+</html>
 
