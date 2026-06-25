@@ -5,66 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mijn Gezondheid</title>
 
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
   <!-- HEADER -->
   <header class="header">
     <div class="logo">
-      <!-- placeholder logo -->
       <img src="logo.png" alt="Logo" />
     </div>
 
-    <nav class="top-nav">
-      <button id="langBtn">EN</button>
-      <a href="#overzicht" id="overviewLink">Overzicht</a>
-    </nav>
+    <div class="header-right">
+      <select id="languageSwitch">
+        <option value="nl">NL</option>
+        <option value="en">EN</option>
+      </select>
+
+      <button class="overview-btn">Overzicht</button>
+    </div>
   </header>
 
   <!-- MAIN -->
-  <main>
+  <main class="main">
 
-    <!-- WELCOME -->
-    <section class="welcome">
-      <h1 id="welcomeText">Welkom terug 👋</h1>
-      <p id="subtitle">Blijf werken aan jouw gezondheid</p>
-
-      <button class="primary-btn" id="startBtn">Start training</button>
+    <!-- START TRAINING -->
+    <section class="card">
+      <h2>Training</h2>
+      <button class="primary-btn">Start training</button>
     </section>
 
-    <!-- PROGRESS -->
-    <section class="progress">
-      <h2 id="progressTitle">Voortgang</h2>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 45%"></div>
+    <!-- SNELLE TOEGANG -->
+    <section class="card">
+      <h2>Snelle toegang</h2>
+
+      <div class="quick-buttons">
+        <button>Spiergroepen</button>
+        <button>Progressie</button>
+        <button>Voeding</button>
       </div>
-      <p>45% van je weekdoel behaald</p>
-    </section>
-
-    <!-- QUICK ACTIONS -->
-    <section class="actions">
-      <button> Spiergroepen</button>
-      <button> Progressie</button>
-      <button> Voeding</button>
     </section>
 
     <!-- DOELSTELLING -->
-    <section class="goal">
-      <h2 id="goalTitle">Doelstelling</h2>
-      <textarea id="goalText" placeholder="Schrijf hier je doelstelling..."></textarea>
-        <button id="saveGoalBtn">Opslaan</button>
+    <section class="card">
+      <h2>Doelstelling</h2>
+      <textarea placeholder="Schrijf je doel hier..."></textarea>
     </section>
 
   </main>
 
   <!-- FOOTER NAV -->
   <footer class="footer">
-    <a href="#">Home</a>
-    <a href="workout.html">Workouts</a>
-    <a href="#">Voeding</a>
-    <a href="#">Progressie</a>
-    <a href="#">Instellingen</a>
+    <button>Home</button>
+    <button>Workouts</button>
+    <button>Voeding</button>
+    <button>Progressie</button>
+    <button>Instellingen</button>
   </footer>
 
   <script src="app.js"></script>
