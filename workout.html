@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workout</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Voortgang</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="container">
+        <!-- Language Switch -->
+        <div class="language-switch">
+            <button id="langNl" class="lang-btn active">NL</button>
+            <button id="langEn" class="lang-btn">EN</button>
+        </div>
 
-<header class="header">
-  <h1>Workout Dashboard</h1>
-</header>
+        <!-- Header -->
+        <header class="header">
+            <h1 id="pageTitle">Workout Voortgang</h1>
+            <button onclick="navigateTo('index')" class="btn-back">← Terug</button>
+        </header>
 
-<main class="main">
+        <!-- Main Content -->
+        <main id="mainContent" class="main-content">
+            <div class="section">
+                <h2 id="startWorkoutTitle">Start een Workout</h2>
+                <button onclick="startNewWorkout()" class="btn-cta" id="startWorkoutBtn">Start Nieuw Workout</button>
+            </div>
 
-  <!-- PROGRESS -->
-  <section class="card">
-    <h2>Week progress</h2>
+            <div class="section">
+                <h2 id="workoutHistoryTitle">Workout Historie</h2>
+                <div id="workoutHistory" class="workout-history">
+                    <p id="noWorkouts">Geen workouts opgeslagen</p>
+                </div>
+            </div>
 
-    <p id="text"></p>
+            <div class="section">
+                <h2 id="personalRecordsTitle">Persoonlijke Records</h2>
+                <div id="personalRecords" class="personal-records">
+                    <p id="noPRs">Geen records opgeslagen</p>
+                </div>
+            </div>
+        </main>
 
-    <div class="progress-bar">
-      <div class="progress-fill" id="bar"></div>
+        <!-- Footer Navigation -->
+        <footer class="footer">
+            <nav class="nav-footer">
+                <a href="#" onclick="navigateTo('index')" class="nav-item" id="navHome">
+                    <span class="icon">🏠</span>
+                    <span id="navHomeText">Home</span>
+                </a>
+                <a href="#" onclick="navigateTo('nutrition')" class="nav-item" id="navFood">
+                    <span class="icon">🍽️</span>
+                    <span id="navFoodText">Voeding</span>
+                </a>
+                <a href="#" onclick="navigateTo('workout')" class="nav-item active" id="navWorkout">
+                    <span class="icon">💪</span>
+                    <span id="navWorkoutText">Training</span>
+                </a>
+                <a href="#" onclick="navigateTo('progress')" class="nav-item" id="navProgress">
+                    <span class="icon">📊</span>
+                    <span id="navProgressText">Voortgang</span>
+                </a>
+                <a href="#" onclick="navigateTo('settings')" class="nav-item" id="navSettings">
+                    <span class="icon">⚙️</span>
+                    <span id="navSettingsText">Instellingen</span>
+                </a>
+            </nav>
+        </footer>
     </div>
-  </section>
 
-  <!-- WEEK -->
-  <section class="card">
-    <h2>Week overzicht</h2>
-    <ul id="list"></ul>
-  </section>
-
-  <!-- STATS -->
-  <section class="card">
-    <h2>Statistieken</h2>
-    <p id="stats"></p>
-  </section>
-
-  <!-- START -->
-  <section class="card">
-    <h2>Training starten</h2>
-    <button onclick="location.href='training.html'">Start training</button>
-  </section>
-
-</main>
-
-<footer class="footer">
-  <button onclick="location.href='index.html'">Home</button>
-  <button onclick="location.href='workout.html'">Workout</button>
-  <button onclick="location.href='training.html'">Training</button>
-</footer>
-
-<script src="workout.js"></script>
+    <script src="app.js"></script>
+    <script src="workout.js"></script>
 </body>
 </html>

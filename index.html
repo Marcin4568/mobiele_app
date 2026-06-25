@@ -1,60 +1,79 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mijn Gezondheid</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="container">
+        <!-- Language Switch -->
+        <div class="language-switch">
+            <button id="langNl" class="lang-btn active">NL</button>
+            <button id="langEn" class="lang-btn">EN</button>
+        </div>
 
-<header class="header">
-  <h1>Mijn Gezondheid</h1>
-</header>
+        <!-- Header -->
+        <header class="header">
+            <h1 id="appTitle">Fitness Tracker</h1>
+        </header>
 
-<main class="main">
+        <!-- Main Content -->
+        <main id="mainContent" class="main-content">
+            <div class="overview-section">
+                <div class="card">
+                    <h2 id="welcomeTitle">Welkom</h2>
+                    <p id="welcomeText">Start je fitness reis vandaag!</p>
+                </div>
 
-  <section class="card">
-    <h2>Jouw progressie</h2>
-    <p id="progressText">0 van de 5 trainingen gedaan</p>
+                <div class="card">
+                    <h3 id="goalsTitle">Doelstellingen</h3>
+                    <textarea id="goalInput" placeholder="Schrijf je doelstellingen hier..."></textarea>
+                    <button id="saveGoal" onclick="saveGoal()" class="btn-primary">Opslaan</button>
+                    <div id="goalDisplay" class="goal-display"></div>
+                </div>
 
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+                <div class="card">
+                    <h3 id="progressTitle">Recente Voortgang</h3>
+                    <div id="progressOverview" class="progress-overview">
+                        <p id="noProgress">Geen voortgang opgeslagen</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <button onclick="navigateTo('training')" class="btn-cta" id="startTrainingBtn">Start Training</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer Navigation -->
+        <footer class="footer">
+            <nav class="nav-footer">
+                <a href="#" onclick="navigateTo('index')" class="nav-item active" id="navHome">
+                    <span class="icon">🏠</span>
+                    <span id="navHomeText">Home</span>
+                </a>
+                <a href="#" onclick="navigateTo('nutrition')" class="nav-item" id="navFood">
+                    <span class="icon">🍽️</span>
+                    <span id="navFoodText">Voeding</span>
+                </a>
+                <a href="#" onclick="navigateTo('workout')" class="nav-item" id="navWorkout">
+                    <span class="icon">💪</span>
+                    <span id="navWorkoutText">Training</span>
+                </a>
+                <a href="#" onclick="navigateTo('progress')" class="nav-item" id="navProgress">
+                    <span class="icon">📊</span>
+                    <span id="navProgressText">Voortgang</span>
+                </a>
+                <a href="#" onclick="navigateTo('settings')" class="nav-item" id="navSettings">
+                    <span class="icon">⚙️</span>
+                    <span id="navSettingsText">Instellingen</span>
+                </a>
+            </nav>
+        </footer>
     </div>
-  </section>
 
-  <section class="card">
-    <h2>Doelstelling</h2>
-
-    <p id="goalText">Nog geen doel</p>
-
-    <textarea id="goalInput" placeholder="Schrijf je doel"></textarea>
-
-    <button onclick="saveGoal()">Opslaan</button>
-    <button onclick="deleteGoal()">Verwijder</button>
-  </section>
-
-  <section class="card">
-    <h2>Training</h2>
-    <button onclick="location.href='training.html'">Start training</button>
-  </section>
-
-  <section class="card">
-    <h2>Snelle toegang</h2>
-
-    <button onclick="location.href='workout.html'">Workouts</button>
-  </section>
-
-</main>
-
-<script src="app.js"></script>
-
-<footer class="footer">
-  <button onclick="location.href='index.html'">Home</button>
-  <button onclick="location.href='workout.html'">Workouts</button>
-  <button onclick="location.href='training.html'">Training</button>
-</footer>
-
+    <script src="app.js"></script>
 </body>
 </html>
