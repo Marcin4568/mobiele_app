@@ -12,7 +12,6 @@ const translations = {
         navWorkoutText: 'Training',
         navProgressText: 'Voortgang',
         navSettingsText: 'Instellingen',
-        pageTitle: 'Pagina',
     },
     en: {
         appTitle: 'Fitness Tracker',
@@ -26,7 +25,6 @@ const translations = {
         navWorkoutText: 'Workout',
         navProgressText: 'Progress',
         navSettingsText: 'Settings',
-        pageTitle: 'Page',
     }
 };
 
