@@ -1,79 +1,60 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mijn Gezondheid</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <h1>Mijn Gezondheid</h1>
+<header class="header">
+  <h1>Mijn Gezondheid</h1>
+</header>
 
-    <select id="languageSwitch">
-      <option value="nl">NL</option>
-      <option value="en">EN</option>
-    </select>
-  </header>
+<main class="main">
 
-  <main class="main">
+  <section class="card">
+    <h2>Jouw progressie</h2>
+    <p id="progressText">0 van de 5 trainingen gedaan</p>
 
-    <!-- PROGRESS -->
-    <section class="card">
-      <h2>Jouw progressie</h2>
-      <p id="progressText">3 van de 5 trainingen gedaan</p>
-
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </section>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </section>
 
   <section class="card">
     <h2>Doelstelling</h2>
 
-    <p id="goalText">Nog geen doel ingesteld</p>
+    <p id="goalText">Nog geen doel</p>
 
-    <textarea id="goalInput" placeholder="Schrijf je doel..."></textarea>
+    <textarea id="goalInput" placeholder="Schrijf je doel"></textarea>
 
-    <button onclick="saveGoal()">Opslaan doel</button>
-    <button class="secondary" onclick="deleteGoal()">Verwijder doel</button>
+    <button onclick="saveGoal()">Opslaan</button>
+    <button onclick="deleteGoal()">Verwijder</button>
   </section>
 
-    <!-- TRAINING -->
-    <section class="card">
-      <h2>Training</h2>
-      <p>Start je workout van vandaag</p>
+  <section class="card">
+    <h2>Training</h2>
+    <button onclick="location.href='training.html'">Start training</button>
+  </section>
 
-      <button onclick="goTraining()">Start training</button>
-    </section>
+  <section class="card">
+    <h2>Snelle toegang</h2>
 
-    <!-- SNELLE TOEGANG -->
-    <section class="card">
-      <h2>Snelle toegang</h2>
-
-      <div class="quick-buttons">
-        <button onclick="location.href='workout.html'">Workouts</button>
-        <button>Progressie</button>
-        <button>Voeding</button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <button onclick="location.href='index.html'">Home</button>
     <button onclick="location.href='workout.html'">Workouts</button>
-    <button onclick="location.href='training.html'">Training</button>
-    <button>Voeding</button>
-    <button>Instellingen</button>
-  </footer>
+  </section>
 
-  <script src="app.js"></script>
+</main>
+
+<script src="app.js"></script>
+
+<footer class="footer">
+  <button onclick="location.href='index.html'">Home</button>
+  <button onclick="location.href='workout.html'">Workouts</button>
+  <button onclick="location.href='training.html'">Training</button>
+</footer>
 
 </body>
 </html>

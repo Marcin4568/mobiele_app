@@ -1,113 +1,103 @@
-let currentLevel = "easy";
+let level = "easy";
+let stepIndex = 0;
+let started = false;
 
-const workouts = {
+const plan = {
   monday: {
     name: "Push dag",
-    exercises: {
-      easy: ["10 push-ups", "20 sec plank"],
-      medium: ["20 push-ups", "40 sec plank", "10 dips"],
-      hard: ["40 push-ups", "1 min plank", "20 dips", "burpees"]
+    steps: {
+      easy: ["Warming-up", "10 push-ups", "Plank 20 sec"],
+      medium: ["Warming-up", "20 push-ups", "Plank 40 sec", "dips"],
+      hard: ["Intense warm-up", "40 push-ups", "1 min plank", "burpees"]
     }
   },
-
   tuesday: {
     name: "Cardio",
-    exercises: {
+    steps: {
       easy: ["10 min wandelen"],
-      medium: ["20 min hardlopen"],
-      hard: ["30 min hardlopen + sprint intervals"]
+      medium: ["20 min joggen"],
+      hard: ["30 min interval run"]
     }
   },
-
   wednesday: {
-    name: "Rustdag",
-    exercises: {
-      easy: ["Rust & herstel"],
-      medium: ["Lichte stretch"],
-      hard: ["Actieve recovery + mobiliteit"]
-    }
-  },
-
-  thursday: {
-    name: "Leg day",
-    exercises: {
-      easy: ["10 squats", "10 lunges"],
-      medium: ["20 squats", "20 lunges", "plank"],
-      hard: ["50 squats", "40 lunges", "jump squats"]
-    }
-  },
-
-  friday: {
-    name: "Full body",
-    exercises: {
-      easy: ["lichte workout"],
-      medium: ["full body circuit"],
-      hard: ["intensieve HIIT training"]
-    }
-  },
-
-  saturday: {
-    name: "Rustdag",
-    exercises: {
-      easy: ["rust"],
-      medium: ["wandeling"],
-      hard: ["lichte training"]
-    }
-  },
-
-  sunday: {
-    name: "Flex dag",
-    exercises: {
-      easy: ["stretching"],
-      medium: ["yoga"],
-      hard: ["core training"]
+    name: "Core",
+    steps: {
+      easy: ["lichte core"],
+      medium: ["abs training"],
+      hard: ["intense core workout"]
     }
   }
 };
 
-// DAG OPHALEN
 function getToday() {
-  const days = [
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday"
-  ];
-
-  return days[new Date().getDay()];
-}
-
-// LEVEL INSTELLEN
-function setLevel(level) {
-  currentLevel = level;
-  renderTraining();
-}
-
-// RENDER TRAINING
-function renderTraining() {
-  const today = getToday();
-  const data = workouts[today];
-
-  const container = document.getElementById("trainingContainer");
-
-  container.innerHTML = `
-    <h3>${data.name}</h3>
-    <ul>
-      ${data.exercises[currentLevel]
-        .map(ex => `<li onclick="completeExercise(this)">💪 ${ex}</li>`)
-        .join("")}
-    </ul>
-  `;
-}
-
-// MARK AS DONE
-function completeExercise(el) {
-  el.style.textDecoration = "line-through";
-  el.style.opacity = "0.5";
+  return ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][new Date().getDay()];
 }
 
 // START
-renderTraining();
+document.getElementById("startBtn").addEventListener("click", () => {
+  started = true;
+  stepIndex = 0;
+
+  document.getElementById("box").style.display = "block";
+  loadStep();
+});
+
+// LEVEL
+window.setLevel = function(lvl) {
+  level = lvl;
+  stepIndex = 0;
+  if (started) loadStep();
+};
+
+// STEP
+function loadStep() {
+  const today = getToday();
+  const data = plan[today] || plan.monday;
+
+  document.getElementById("title").innerText = data.name;
+  document.getElementById("step").innerText = data.steps[level][stepIndex];
+}
+
+// NEXT
+document.getElementById("nextBtn").addEventListener("click", () => {
+  const today = getToday();
+  const data = plan[today];
+
+  stepIndex++;
+
+  if (stepIndex >= data.steps[level].length) {
+    document.getElementById("step").innerText = "Training klaar 💪";
+    saveWorkout();
+    return;
+  }
+
+  loadStep();
+});
+
+// RESET
+document.getElementById("resetBtn").addEventListener("click", () => {
+  stepIndex = 0;
+  loadStep();
+});
+
+// SAVE
+function saveWorkout() {
+  const now = new Date();
+  const date = now.toISOString().split("T")[0];
+  const day = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][now.getDay()];
+
+  let data = JSON.parse(localStorage.getItem("workout")) || [];
+
+  let existing = data.find(w => w.date === date);
+
+  if (!existing) {
+    data.push({
+      date,
+      day,
+      level,
+      done: true
+    });
+  }
+
+  localStorage.setItem("workout", JSON.stringify(data));
+}

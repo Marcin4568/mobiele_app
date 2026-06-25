@@ -1,66 +1,50 @@
-let progress = 3;
 let goal = localStorage.getItem("goal") || "";
 
-// INIT
 window.onload = function () {
-  loadProgress();
   loadGoal();
-  updateProgressUI();
+  loadProgress();
 };
 
-// PROGRESS UI
-function loadProgress() {
-  document.getElementById("progressText").innerText =
-    `${progress} van de 5 trainingen gedaan`;
-
-  document.getElementById("progressFill").style.width =
-    (progress / 5) * 100 + "%";
-}
-
-// DOEL OPSLAAN
 function saveGoal() {
   const input = document.getElementById("goalInput").value;
-
-  if (input.trim() === "") return;
+  if (!input) return;
 
   localStorage.setItem("goal", input);
   loadGoal();
 }
 
-// DOEL VERWIJDEREN
 function deleteGoal() {
   localStorage.removeItem("goal");
-
-  document.getElementById("goalText").innerText =
-    "Nog geen doel ingesteld";
-
-  document.getElementById("goalInput").value = "";
+  document.getElementById("goalText").innerText = "Nog geen doel";
 }
 
-// DOEL LADEN
 function loadGoal() {
-  const saved = localStorage.getItem("goal");
-
-  if (saved) {
-    document.getElementById("goalText").innerText = saved;
-  }
+  const g = localStorage.getItem("goal");
+  if (g) document.getElementById("goalText").innerText = g;
 }
 
-// TRAINING PAGINA
-function goTraining() {
-  window.location.href = "training.html";
+function loadProgress() {
+  let data = JSON.parse(localStorage.getItem("workouts")) || [];
+
+  const weekData = getThisWeek(data);
+
+  let total = 5;
+  let percent = (weekData / total) * 100;
+
+  document.getElementById("progressText").innerText =
+    `${weekData} van ${total} trainingen gedaan`;
+
+  document.getElementById("progressFill").style.width =
+    percent + "%";
 }
 
-// TAAL SWITCH (simpel maar werkend basis)
-document.getElementById("languageSwitch").addEventListener("change", (e) => {
-  const lang = e.target.value;
+function getThisWeek(data) {
+  const now = new Date();
+  const start = new Date();
+  start.setDate(now.getDate() - 7);
 
-  if (lang === "en") {
-    document.querySelector("h1").innerText = "Health App";
-    document.getElementById("progressText").innerText =
-      `${progress} of 5 workouts done`;
-  } else {
-    document.querySelector("h1").innerText = "Mijn Gezondheid";
-    loadProgress();
-  }
-});
+  return data.filter(w => {
+    let d = new Date(w.date);
+    return w.done && d >= start;
+  }).length;
+}
