@@ -13,37 +13,6 @@ const translations = {
         navProgressText: 'Voortgang',
         navSettingsText: 'Instellingen',
         pageTitle: 'Pagina',
-        selectDifficultyTitle: 'Kies Moeilijkheidsgraad',
-        easyText: 'Makkelijk',
-        mediumText: 'Gemiddeld',
-        hardText: 'Moeilijk',
-        todayWorkoutTitle: 'Training van Vandaag',
-        setsLabel: 'Series',
-        repsLabel: 'Herhalingen',
-        restLabel: 'Rust',
-        completeBtn: 'Afgerond',
-        prevBtn: '← Vorige',
-        nextBtn: 'Volgende →',
-        finishBtn: 'Training Afronden',
-        cancelBtn: 'Annuleren',
-        calorieTitle: 'Dagelijkse Calorieën',
-        calorieLabel: 'Doeldagelijks (kcal):',
-        macrosTitle: 'Macro Nutriënten',
-        proteinLabel: 'Eiwitten',
-        carbsLabel: 'Koolhydraten',
-        fatLabel: 'Vetten',
-        proteinFoodsLabel: 'Hoog in Eiwitten 🍗',
-        carbFoodsLabel: 'Goede Koolhydraten 🌾',
-        fatFoodsLabel: 'Gezonde Vetten 🥑',
-        languageTitle: 'Taal Instellingen',
-        languageLabel: 'Kies je taal:',
-        profileTitle: 'Profielinstellingen',
-        nameLabel: 'Naam:',
-        ageLabel: 'Leeftijd:',
-        genderLabel: 'Geslacht:',
-        statsTitle: 'Statistieken',
-        workoutHistoryTitle: 'Workout Historie',
-        noProgress: 'Geen voortgang opgeslagen',
     },
     en: {
         appTitle: 'Fitness Tracker',
@@ -58,37 +27,6 @@ const translations = {
         navProgressText: 'Progress',
         navSettingsText: 'Settings',
         pageTitle: 'Page',
-        selectDifficultyTitle: 'Select Difficulty',
-        easyText: 'Easy',
-        mediumText: 'Medium',
-        hardText: 'Hard',
-        todayWorkoutTitle: "Today's Workout",
-        setsLabel: 'Sets',
-        repsLabel: 'Reps',
-        restLabel: 'Rest',
-        completeBtn: 'Complete',
-        prevBtn: '← Previous',
-        nextBtn: 'Next →',
-        finishBtn: 'Finish Workout',
-        cancelBtn: 'Cancel',
-        calorieTitle: 'Daily Calories',
-        calorieLabel: 'Daily Goal (kcal):',
-        macrosTitle: 'Macro Nutrients',
-        proteinLabel: 'Protein',
-        carbsLabel: 'Carbs',
-        fatLabel: 'Fat',
-        proteinFoodsLabel: 'High in Protein 🍗',
-        carbFoodsLabel: 'Good Carbs 🌾',
-        fatFoodsLabel: 'Healthy Fats 🥑',
-        languageTitle: 'Language Settings',
-        languageLabel: 'Choose your language:',
-        profileTitle: 'Profile Settings',
-        nameLabel: 'Name:',
-        ageLabel: 'Age:',
-        genderLabel: 'Gender:',
-        statsTitle: 'Statistics',
-        workoutHistoryTitle: 'Workout History',
-        noProgress: 'No progress saved',
     }
 };
 
@@ -132,29 +70,10 @@ function updateLanguage() {
     }
     
     document.documentElement.lang = currentLanguage;
-    updateAllText();
 }
 
 function t(key) {
     return translations[currentLanguage][key] || translations['nl'][key] || key;
-}
-
-function updateAllText() {
-    document.querySelectorAll('[id]').forEach(el => {
-        const id = el.id;
-        const text = t(id + 'Text') || t(id) || null;
-        
-        if (text && !el.querySelector('input') && !el.querySelector('textarea') && !el.querySelector('select')) {
-            if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA' && el.tagName !== 'SELECT') {
-                const firstTextNode = Array.from(el.childNodes).find(node => node.nodeType === 3);
-                if (firstTextNode && firstTextNode.textContent.trim()) {
-                    el.textContent = text;
-                } else if (!el.children.length) {
-                    el.textContent = text;
-                }
-            }
-        }
-    });
 }
 
 // ===== NAVIGATION =====

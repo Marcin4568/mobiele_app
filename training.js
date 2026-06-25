@@ -1,103 +1,114 @@
-let level = "easy";
-let stepIndex = 0;
-let started = false;
-
-const plan = {
-  monday: {
-    name: "Push dag",
-    steps: {
-      easy: ["Warming-up", "10 push-ups", "Plank 20 sec"],
-      medium: ["Warming-up", "20 push-ups", "Plank 40 sec", "dips"],
-      hard: ["Intense warm-up", "40 push-ups", "1 min plank", "burpees"]
-    }
-  },
-  tuesday: {
-    name: "Cardio",
-    steps: {
-      easy: ["10 min wandelen"],
-      medium: ["20 min joggen"],
-      hard: ["30 min interval run"]
-    }
-  },
-  wednesday: {
-    name: "Core",
-    steps: {
-      easy: ["lichte core"],
-      medium: ["abs training"],
-      hard: ["intense core workout"]
-    }
-  }
+const trainingPlans = {
+    easy: [
+        { name: 'Push-ups', sets: 3, reps: 10, rest: 60 },
+        { name: 'Squats', sets: 3, reps: 15, rest: 90 },
+        { name: 'Planks', sets: 3, reps: 30, rest: 60 },
+    ],
+    medium: [
+        { name: 'Barbell Bench Press', sets: 4, reps: 8, rest: 120 },
+        { name: 'Squats', sets: 4, reps: 6, rest: 120 },
+        { name: 'Bent Over Rows', sets: 4, reps: 8, rest: 120 },
+    ],
+    hard: [
+        { name: 'Heavy Barbell Bench Press', sets: 5, reps: 5, rest: 180 },
+        { name: 'Heavy Squats', sets: 5, reps: 3, rest: 180 },
+        { name: 'Heavy Deadlifts', sets: 3, reps: 3, rest: 300 },
+    ]
 };
 
-function getToday() {
-  return ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][new Date().getDay()];
+let currentDifficulty = null;
+let currentExerciseIndex = 0;
+let currentExercises = [];
+let trainingInProgress = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    initLanguageSwitchers();
+    updateLanguage();
+});
+
+function selectDifficulty(difficulty) {
+    currentDifficulty = difficulty;
+    currentExerciseIndex = 0;
+    currentExercises = trainingPlans[difficulty];
+    
+    document.getElementById('difficultySection').style.display = 'none';
+    document.getElementById('workoutSection').style.display = 'block';
+    
+    displayExercise();
+    trainingInProgress = true;
 }
 
-// START
-document.getElementById("startBtn").addEventListener("click", () => {
-  started = true;
-  stepIndex = 0;
-
-  document.getElementById("box").style.display = "block";
-  loadStep();
-});
-
-// LEVEL
-window.setLevel = function(lvl) {
-  level = lvl;
-  stepIndex = 0;
-  if (started) loadStep();
-};
-
-// STEP
-function loadStep() {
-  const today = getToday();
-  const data = plan[today] || plan.monday;
-
-  document.getElementById("title").innerText = data.name;
-  document.getElementById("step").innerText = data.steps[level][stepIndex];
+function displayExercise() {
+    if (currentExerciseIndex >= currentExercises.length) {
+        return;
+    }
+    
+    const exercise = currentExercises[currentExerciseIndex];
+    document.getElementById('exerciseName').textContent = exercise.name;
+    document.getElementById('setsValue').textContent = exercise.sets;
+    document.getElementById('repsValue').textContent = exercise.reps;
+    document.getElementById('restValue').textContent = exercise.rest + 's';
+    document.getElementById('exerciseCounter').textContent = `${currentExerciseIndex + 1} / ${currentExercises.length}`;
+    document.getElementById('completedSets').value = '';
 }
 
-// NEXT
-document.getElementById("nextBtn").addEventListener("click", () => {
-  const today = getToday();
-  const data = plan[today];
+function nextExercise() {
+    if (currentExerciseIndex < currentExercises.length - 1) {
+        currentExerciseIndex++;
+        displayExercise();
+    }
+}
 
-  stepIndex++;
+function previousExercise() {
+    if (currentExerciseIndex > 0) {
+        currentExerciseIndex--;
+        displayExercise();
+    }
+}
 
-  if (stepIndex >= data.steps[level].length) {
-    document.getElementById("step").innerText = "Training klaar 💪";
-    saveWorkout();
-    return;
-  }
+function completeExercise() {
+    const completedSets = document.getElementById('completedSets').value;
+    if (completedSets) {
+        if (currentExerciseIndex < currentExercises.length - 1) {
+            nextExercise();
+        } else {
+            alert('Goed gedaan! Dit was de laatste oefening.');
+        }
+    } else {
+        alert('Voer aub het aantal series in');
+    }
+}
 
-  loadStep();
-});
+function finishTraining() {
+    const totalCalories = (currentExerciseIndex + 1) * (currentDifficulty === 'easy' ? 50 : currentDifficulty === 'medium' ? 100 : 150);
+    
+    const workout = {
+        date: new Date().toISOString().split('T')[0],
+        difficulty: currentDifficulty,
+        exercises: currentExerciseIndex + 1,
+        totalCalories: totalCalories,
+    };
+    
+    let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+    workouts.push(workout);
+    localStorage.setItem('workouts', JSON.stringify(workouts));
+    
+    alert(`Training afgerond! ${totalCalories} calorieën verbrand.`);
+    resetTraining();
+}
 
-// RESET
-document.getElementById("resetBtn").addEventListener("click", () => {
-  stepIndex = 0;
-  loadStep();
-});
+function cancelTraining() {
+    if (confirm('Weet je zeker dat je de training wilt annuleren?')) {
+        resetTraining();
+    }
+}
 
-// SAVE
-function saveWorkout() {
-  const now = new Date();
-  const date = now.toISOString().split("T")[0];
-  const day = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][now.getDay()];
-
-  let data = JSON.parse(localStorage.getItem("workout")) || [];
-
-  let existing = data.find(w => w.date === date);
-
-  if (!existing) {
-    data.push({
-      date,
-      day,
-      level,
-      done: true
-    });
-  }
-
-  localStorage.setItem("workout", JSON.stringify(data));
+function resetTraining() {
+    currentDifficulty = null;
+    currentExerciseIndex = 0;
+    currentExercises = [];
+    trainingInProgress = false;
+    
+    document.getElementById('workoutSection').style.display = 'none';
+    document.getElementById('difficultySection').style.display = 'block';
 }
