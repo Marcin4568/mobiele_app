@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16213a">
+    <title>FitFocus | Instellingen</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="settings">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="FitFocus home">
+        <img class="brand-mark" src="./assets/icon.svg" alt="">
+        <span>FitFocus</span>
+      </a>
+      <label class="language-field">
+        <span data-i18n="language">Taal</span>
+        <select data-language-select aria-label="Taal kiezen">
+          <option value="nl">NL</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="app-shell">
+      <section class="page-title">
+        <p class="eyebrow" data-i18n="preferences">Voorkeuren</p>
+        <h1 data-i18n="settingsTitle">Instellingen</h1>
+        <p class="muted" data-i18n="settingsIntro">Pas taal, doelen en profielwaarden aan voor je berekeningen.</p>
+      </section>
+
+      <section class="settings-grid">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="language">Taal</p>
+              <h2 data-i18n="languageSwitch">Taalswitch</h2>
+            </div>
+          </div>
+          <label class="wide-label">
+            <span data-i18n="chooseLanguage">Kies taal</span>
+            <select data-language-select aria-label="Taal kiezen">
+              <option value="nl">Nederlands</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="profile">Profiel</p>
+              <h2 data-i18n="calculationSettings">Berekeningen</h2>
+            </div>
+          </div>
+          <form id="settingsForm" class="stacked-form">
+            <label>
+              <span data-i18n="bodyWeight">Lichaamsgewicht</span>
+              <input id="bodyWeight" type="number" min="30" max="250" step="0.1" required>
+            </label>
+            <div class="two-column">
+              <label>
+                <span data-i18n="weeklyWorkouts">Weektrainingen</span>
+                <input id="weeklyWorkouts" type="number" min="1" max="14" step="1" required>
+              </label>
+              <label>
+                <span data-i18n="weeklyMinutes">Weekminuten</span>
+                <input id="weeklyMinutes" type="number" min="30" max="1200" step="5" required>
+              </label>
+            </div>
+            <button class="primary-action full-width" type="submit" data-i18n="saveSettings">Instellingen opslaan</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="offline">Offline</p>
+              <h2 data-i18n="pwaStatus">PWA status</h2>
+            </div>
+          </div>
+          <div class="status-list">
+            <p><strong data-i18n="storage">Opslag</strong><span data-i18n="localStorage">LocalStorage actief</span></p>
+            <p><strong data-i18n="serviceWorker">Service worker</strong><span id="serviceWorkerStatus">-</span></p>
+          </div>
+          <button id="installButton" class="secondary-action full-width" type="button" hidden data-i18n="installApp">Installeren</button>
+        </article>
+
+        <article class="panel danger-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="data">Data</p>
+              <h2 data-i18n="resetData">Gegevens resetten</h2>
+            </div>
+          </div>
+          <button id="resetAllButton" class="danger-action full-width" type="button" data-i18n="resetAll">Alles verwijderen</button>
+        </article>
+      </section>
+    </main>
+
+    <footer class="bottom-nav" aria-label="Hoofdnavigatie">
+      <a href="./index.html" data-nav="home"><span class="nav-icon">H</span><span data-i18n="home">Home</span></a>
+      <a href="./training.html" data-nav="training"><span class="nav-icon">T</span><span data-i18n="train">Trainen</span></a>
+      <a href="./progress.html" data-nav="progress"><span class="nav-icon">P</span><span data-i18n="progress">Progressie</span></a>
+      <a href="./voeding.html" data-nav="nutrition"><span class="nav-icon">V</span><span data-i18n="nutrition">Voeding</span></a>
+      <a href="./settings.html" data-nav="settings"><span class="nav-icon">I</span><span data-i18n="settings">Instellingen</span></a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

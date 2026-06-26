@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16213a">
+    <title>FitFocus | Progressie</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="progress">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="FitFocus home">
+        <img class="brand-mark" src="./assets/icon.svg" alt="">
+        <span>FitFocus</span>
+      </a>
+      <label class="language-field">
+        <span data-i18n="language">Taal</span>
+        <select data-language-select aria-label="Taal kiezen">
+          <option value="nl">NL</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="app-shell">
+      <section class="page-title">
+        <p class="eyebrow" data-i18n="overview">Overzicht</p>
+        <h1 data-i18n="progressTitle">Progressie per periode</h1>
+        <p class="muted" data-i18n="progressIntro">Filter je opgeslagen gezondheidsonderdelen per dag, week of maand.</p>
+      </section>
+
+      <section class="period-tabs" aria-label="Periode kiezen">
+        <button class="is-active" type="button" data-period="day" data-i18n="day">Dag</button>
+        <button type="button" data-period="week" data-i18n="week">Week</button>
+        <button type="button" data-period="month" data-i18n="month">Maand</button>
+      </section>
+
+      <section class="metric-grid wide">
+        <div class="metric-card">
+          <span data-i18n="items">Onderdelen</span>
+          <strong id="progressItemCount">0</strong>
+        </div>
+        <div class="metric-card">
+          <span data-i18n="trainingMinutes">Trainingsminuten</span>
+          <strong id="progressMinutes">0</strong>
+        </div>
+        <div class="metric-card">
+          <span data-i18n="burnedKcal">Verbrande kcal</span>
+          <strong id="progressKcal">0</strong>
+        </div>
+        <div class="metric-card">
+          <span data-i18n="protein">Eiwitten</span>
+          <strong id="progressProtein">0g</strong>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="visual">Visualisatie</p>
+              <h2 data-i18n="activityChart">Activiteit</h2>
+            </div>
+          </div>
+          <canvas id="progressChart" width="620" height="300" aria-label="Progressiegrafiek"></canvas>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="storedData">Opgeslagen data</p>
+              <h2 data-i18n="periodItems">Onderdelen in periode</h2>
+            </div>
+          </div>
+          <div id="progressList" class="entry-list empty-state" data-i18n="noPeriodEntries">Geen onderdelen voor deze periode.</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="bottom-nav" aria-label="Hoofdnavigatie">
+      <a href="./index.html" data-nav="home"><span class="nav-icon">H</span><span data-i18n="home">Home</span></a>
+      <a href="./training.html" data-nav="training"><span class="nav-icon">T</span><span data-i18n="train">Trainen</span></a>
+      <a href="./progress.html" data-nav="progress"><span class="nav-icon">P</span><span data-i18n="progress">Progressie</span></a>
+      <a href="./voeding.html" data-nav="nutrition"><span class="nav-icon">V</span><span data-i18n="nutrition">Voeding</span></a>
+      <a href="./settings.html" data-nav="settings"><span class="nav-icon">I</span><span data-i18n="settings">Instellingen</span></a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
