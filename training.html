@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16213a">
+    <title>FitFocus | Trainen</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="training">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="FitFocus home">
+        <img class="brand-mark" src="./assets/icon.svg" alt="">
+        <span>FitFocus</span>
+      </a>
+      <label class="language-field">
+        <span data-i18n="language">Taal</span>
+        <select data-language-select aria-label="Taal kiezen">
+          <option value="nl">NL</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="app-shell">
+      <section class="page-title">
+        <p class="eyebrow" data-i18n="strengthPlan">Krachtplan</p>
+        <h1 data-i18n="trainingTitle">Start een training</h1>
+        <p class="muted" data-i18n="trainingIntro">Kies een spiergroep, start de sessie en sla je minuten en kcal direct op.</p>
+      </section>
+
+      <section class="training-layout">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="muscleGroups">Spiergroepen</p>
+              <h2 data-i18n="chooseMuscle">Kies je focus</h2>
+            </div>
+          </div>
+          <div id="muscleGrid" class="muscle-grid" aria-label="Spiergroep kiezen"></div>
+        </article>
+
+        <article class="panel training-plan">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="selectedWorkout">Gekozen training</p>
+              <h2 id="selectedMuscleTitle">Borst</h2>
+            </div>
+            <output id="sessionTimer" class="score-pill">00:00</output>
+          </div>
+
+          <ul id="exerciseList" class="exercise-list"></ul>
+
+          <form id="trainingForm" class="stacked-form">
+            <label>
+              <span data-i18n="date">Datum</span>
+              <input id="trainingDate" type="date" required>
+            </label>
+            <div class="two-column">
+              <label>
+                <span data-i18n="plannedMinutes">Geplande minuten</span>
+                <input id="trainingMinutes" type="number" min="5" max="240" value="45" required>
+              </label>
+              <label>
+                <span data-i18n="effort">Intensiteit</span>
+                <select id="trainingEffort">
+                  <option value="light" data-i18n="light">Licht</option>
+                  <option value="normal" selected data-i18n="normal">Normaal</option>
+                  <option value="heavy" data-i18n="heavy">Zwaar</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span data-i18n="trainingNote">Notitie</span>
+              <input id="trainingNote" maxlength="90" data-i18n-placeholder="trainingNoteExample" placeholder="Bijv. meer gewicht bij bench press">
+            </label>
+            <div class="button-row">
+              <button id="startTrainingButton" class="primary-action" type="button" data-i18n="startTraining">Start training</button>
+              <button id="finishTrainingButton" class="secondary-action" type="submit" data-i18n="finishSave">Afronden en opslaan</button>
+            </div>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer class="bottom-nav" aria-label="Hoofdnavigatie">
+      <a href="./index.html" data-nav="home"><span class="nav-icon">H</span><span data-i18n="home">Home</span></a>
+      <a href="./training.html" data-nav="training"><span class="nav-icon">T</span><span data-i18n="train">Trainen</span></a>
+      <a href="./progress.html" data-nav="progress"><span class="nav-icon">P</span><span data-i18n="progress">Progressie</span></a>
+      <a href="./voeding.html" data-nav="nutrition"><span class="nav-icon">V</span><span data-i18n="nutrition">Voeding</span></a>
+      <a href="./settings.html" data-nav="settings"><span class="nav-icon">I</span><span data-i18n="settings">Instellingen</span></a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16213a">
+    <title>FitFocus | Voeding</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="nutrition">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="FitFocus home">
+        <img class="brand-mark" src="./assets/icon.svg" alt="">
+        <span>FitFocus</span>
+      </a>
+      <label class="language-field">
+        <span data-i18n="language">Taal</span>
+        <select data-language-select aria-label="Taal kiezen">
+          <option value="nl">NL</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="app-shell">
+      <section class="page-title">
+        <p class="eyebrow" data-i18n="nutritionPlan">Voedingsplan</p>
+        <h1 data-i18n="nutritionTitle">Macro's en kcal aanpassen</h1>
+        <p class="muted" data-i18n="nutritionIntro">Stel je koolhydraten, vetten, eiwitten en kcal in en log maaltijden in LocalStorage.</p>
+      </section>
+
+      <section class="nutrition-layout">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="targets">Doelen</p>
+              <h2 data-i18n="dailyTargets">Dagelijkse voedingsdoelen</h2>
+            </div>
+          </div>
+          <form id="nutritionTargetForm" class="stacked-form">
+            <div class="two-column">
+              <label>
+                <span data-i18n="carbs">Koolhydraten</span>
+                <input id="targetCarbs" type="number" min="0" step="1" required>
+              </label>
+              <label>
+                <span data-i18n="protein">Eiwitten</span>
+                <input id="targetProtein" type="number" min="0" step="1" required>
+              </label>
+            </div>
+            <div class="two-column">
+              <label>
+                <span data-i18n="fat">Vetten</span>
+                <input id="targetFat" type="number" min="0" step="1" required>
+              </label>
+              <label>
+                <span data-i18n="kcal">Kcal</span>
+                <input id="targetKcal" type="number" min="0" step="1" required>
+              </label>
+            </div>
+            <div class="macro-result">
+              <span data-i18n="calculatedKcal">Berekend uit macro's</span>
+              <strong id="macroKcalResult">0 kcal</strong>
+            </div>
+            <button class="primary-action full-width" type="submit" data-i18n="saveTargets">Doelen opslaan</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="mealLog">Maaltijdlog</p>
+              <h2 data-i18n="addMeal">Maaltijd toevoegen</h2>
+            </div>
+          </div>
+          <form id="mealForm" class="stacked-form">
+            <label>
+              <span data-i18n="date">Datum</span>
+              <input id="mealDate" type="date" required>
+            </label>
+            <label>
+              <span data-i18n="description">Omschrijving</span>
+              <input id="mealDescription" maxlength="80" data-i18n-placeholder="mealExample" placeholder="Bijv. havermout ontbijt">
+            </label>
+            <div class="three-column">
+              <label>
+                <span data-i18n="carbsShort">Kh</span>
+                <input id="mealCarbs" type="number" min="0" step="1" value="0">
+              </label>
+              <label>
+                <span data-i18n="proteinShort">Eiwit</span>
+                <input id="mealProtein" type="number" min="0" step="1" value="0">
+              </label>
+              <label>
+                <span data-i18n="fatShort">Vet</span>
+                <input id="mealFat" type="number" min="0" step="1" value="0">
+              </label>
+            </div>
+            <label>
+              <span data-i18n="kcalOptional">Kcal optioneel</span>
+              <input id="mealKcal" type="number" min="0" step="1" data-i18n-placeholder="autoKcal" placeholder="Automatisch berekend">
+            </label>
+            <button class="primary-action full-width" type="submit" data-i18n="saveMeal">Maaltijd opslaan</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="today">Vandaag</p>
+            <h2 data-i18n="nutritionProgress">Voedingsprogressie</h2>
+          </div>
+        </div>
+        <div class="macro-bars">
+          <div class="macro-bar" data-macro="carbs">
+            <span data-i18n="carbs">Koolhydraten</span>
+            <strong id="todayCarbs">0g</strong>
+            <div><span id="todayCarbsBar"></span></div>
+          </div>
+          <div class="macro-bar" data-macro="protein">
+            <span data-i18n="protein">Eiwitten</span>
+            <strong id="todayProtein">0g</strong>
+            <div><span id="todayProteinBar"></span></div>
+          </div>
+          <div class="macro-bar" data-macro="fat">
+            <span data-i18n="fat">Vetten</span>
+            <strong id="todayFat">0g</strong>
+            <div><span id="todayFatBar"></span></div>
+          </div>
+          <div class="macro-bar" data-macro="kcal">
+            <span data-i18n="kcal">Kcal</span>
+            <strong id="todayNutritionKcal">0</strong>
+            <div><span id="todayKcalBar"></span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottom-nav" aria-label="Hoofdnavigatie">
+      <a href="./index.html" data-nav="home"><span class="nav-icon">H</span><span data-i18n="home">Home</span></a>
+      <a href="./training.html" data-nav="training"><span class="nav-icon">T</span><span data-i18n="train">Trainen</span></a>
+      <a href="./progress.html" data-nav="progress"><span class="nav-icon">P</span><span data-i18n="progress">Progressie</span></a>
+      <a href="./voeding.html" data-nav="nutrition"><span class="nav-icon">V</span><span data-i18n="nutrition">Voeding</span></a>
+      <a href="./settings.html" data-nav="settings"><span class="nav-icon">I</span><span data-i18n="settings">Instellingen</span></a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
