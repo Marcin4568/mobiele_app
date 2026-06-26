@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Fitness App</title>
+    <title>Instellingen</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1 id="title">Fitness App</h1>
-    <select id="lang">
-        <option value="nl">NL</option>
-        <option value="en">EN</option>
-    </select>
+    <h1>Instellingen</h1>
 </header>
 
 <div class="container">
     <div class="card">
-        <h2 id="welcome">Welkom</h2>
-        <p id="desc">Start vandaag je training en bouw spieren op.</p>
-        <button onclick="location.href='training.html'">Start training</button>
+        <h2>Taal</h2>
+        <select>
+            <option>NL</option>
+            <option>EN</option>
+        </select>
     </div>
 </div>
 
@@ -31,6 +29,8 @@
     <a href="instellingen.html">Instellingen</a>
 </div>
 
-<script src="main.js" defer></script>
+<script src="js/instellingen.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
 </body>
 </html>
