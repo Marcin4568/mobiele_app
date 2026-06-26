@@ -1,36 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Fitness App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16213a">
+    <title>FitFocus | Home</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="home">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="FitFocus home">
+        <img class="brand-mark" src="./assets/icon.svg" alt="">
+        <span>FitFocus</span>
+      </a>
+      <label class="language-field">
+        <span data-i18n="language">Taal</span>
+        <select data-language-select aria-label="Taal kiezen">
+          <option value="nl">NL</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+    </header>
 
-<header>
-    <h1 id="title">Fitness App</h1>
-    <select id="lang">
-        <option value="nl">NL</option>
-        <option value="en">EN</option>
-    </select>
-</header>
+    <main class="app-shell">
+      <section class="hero-panel" aria-labelledby="home-title">
+        <div>
+          <p class="eyebrow" data-i18n="todayFocus">Vandaag</p>
+          <h1 id="home-title" data-i18n="homeTitle">Jouw fitness voortgang</h1>
+          <p class="muted" data-i18n="homeIntro">Bekijk je weekdoel, log een gezondheidsonderdeel en ga direct door naar je progressie.</p>
+        </div>
+        <a class="primary-action" href="./progress.html" data-i18n="viewProgress">Bekijk progressie</a>
+      </section>
 
-<div class="container">
-    <div class="card">
-        <h2 id="welcome">Welkom</h2>
-        <p id="desc">Start vandaag je training en bouw spieren op.</p>
-        <button onclick="location.href='training.html'">Start training</button>
-    </div>
-</div>
+      <section class="dashboard-grid" aria-label="Dashboard">
+        <article class="panel progress-summary">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="weekGoal">Weekdoel</p>
+              <h2 data-i18n="currentProgress">Huidige progressie</h2>
+            </div>
+            <output id="homeProgressPercent" class="score-pill">0%</output>
+          </div>
 
-<div class="footer">
-    <a href="index.html">Home</a>
-    <a href="workouts.html">Workouts</a>
-    <a href="voeding.html">Voeding</a>
-    <a href="progressie.html">Progressie</a>
-    <a href="instellingen.html">Instellingen</a>
-</div>
+          <div class="progress-rail" aria-hidden="true">
+            <span id="homeProgressBar"></span>
+          </div>
 
-<script src="main.js" defer></script>
-</body>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <span data-i18n="workouts">Trainingen</span>
+              <strong id="homeWorkoutCount">0</strong>
+            </div>
+            <div class="metric-card">
+              <span data-i18n="minutes">Minuten</span>
+              <strong id="homeMinutes">0</strong>
+            </div>
+            <div class="metric-card">
+              <span data-i18n="kcal">Kcal</span>
+              <strong id="homeKcal">0</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="lastSevenDays">Laatste 7 dagen</p>
+              <h2 data-i18n="trainingTrend">Trainingstrend</h2>
+            </div>
+          </div>
+          <canvas id="homeTrendChart" width="620" height="260" aria-label="Grafiek met trainingsminuten"></canvas>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="quickAdd">Snel toevoegen</p>
+              <h2 data-i18n="healthPart">Gezondheidsonderdeel</h2>
+            </div>
+          </div>
+          <form id="quickEntryForm" class="stacked-form">
+            <label>
+              <span data-i18n="date">Datum</span>
+              <input id="quickDate" name="date" type="date" required>
+            </label>
+            <label>
+              <span data-i18n="category">Categorie</span>
+              <select id="quickCategory" name="category" required>
+                <option value="training" data-i18n="training">Training</option>
+                <option value="nutrition" data-i18n="nutrition">Voeding</option>
+                <option value="weight" data-i18n="weight">Gewicht</option>
+                <option value="cardio" data-i18n="cardio">Conditie</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="description">Omschrijving</span>
+              <input id="quickDescription" name="description" type="text" maxlength="80" data-i18n-placeholder="descriptionExample" placeholder="Bijv. borsttraining of lunch">
+            </label>
+            <div class="two-column">
+              <label>
+                <span data-i18n="value">Waarde</span>
+                <input id="quickValue" name="value" type="number" min="0" step="0.1" required>
+              </label>
+              <label>
+                <span data-i18n="unit">Eenheid</span>
+                <select id="quickUnit" name="unit" required>
+                  <option value="min">min</option>
+                  <option value="kg">kg</option>
+                  <option value="kcal">kcal</option>
+                  <option value="sets">sets</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary-action full-width" type="submit" data-i18n="saveEntry">Opslaan</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="recent">Recent</p>
+              <h2 data-i18n="latestItems">Laatste onderdelen</h2>
+            </div>
+          </div>
+          <div id="homeRecentList" class="entry-list empty-state" data-i18n="noEntries">Nog geen onderdelen opgeslagen.</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="bottom-nav" aria-label="Hoofdnavigatie">
+      <a href="./index.html" data-nav="home"><span class="nav-icon">H</span><span data-i18n="home">Home</span></a>
+      <a href="./training.html" data-nav="training"><span class="nav-icon">T</span><span data-i18n="train">Trainen</span></a>
+      <a href="./progress.html" data-nav="progress"><span class="nav-icon">P</span><span data-i18n="progress">Progressie</span></a>
+      <a href="./voeding.html" data-nav="nutrition"><span class="nav-icon">V</span><span data-i18n="nutrition">Voeding</span></a>
+      <a href="./settings.html" data-nav="settings"><span class="nav-icon">I</span><span data-i18n="settings">Instellingen</span></a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
 </html>
