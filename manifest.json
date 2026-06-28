@@ -1,0 +1,19 @@
+{
+  "name": "FitFocus Fitness PWA",
+  "short_name": "FitFocus",
+  "description": "Een mobiele fitness app voor training, progressie en voeding.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f8fc",
+  "theme_color": "#16213a",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
