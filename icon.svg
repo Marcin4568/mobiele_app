@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">FitFocus icon</title>
+  <desc id="desc">A fitness app icon with a dumbbell and progress line.</desc>
+  <rect width="512" height="512" rx="96" fill="#16213a"/>
+  <path d="M106 280h54v-48h-54c-14 0-26 12-26 26s12 22 26 22Z" fill="#ff6b4a"/>
+  <path d="M352 280h54c14 0 26-10 26-22s-12-26-26-26h-54v48Z" fill="#ff6b4a"/>
+  <rect x="154" y="202" width="54" height="108" rx="16" fill="#f2c94c"/>
+  <rect x="304" y="202" width="54" height="108" rx="16" fill="#f2c94c"/>
+  <rect x="196" y="238" width="120" height="36" rx="18" fill="#ffffff"/>
+  <path d="M134 365c56-62 93-84 126-60 30 23 56 13 118-58" fill="none" stroke="#34d399" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
